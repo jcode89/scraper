@@ -25,16 +25,18 @@ class Scrape():
             print ("Born: %s" % birth.group())
         except UnboundLocalError:       
             #self.grab_birth_year_2()        		
-      
-            new_stuff = self.soup.find("tr")
-            n_birth = new_stuff.next_sibling.next_sibling.next_sibling.next_sibling#.next_sibling.next_sibling
-            print (n_birth.next_element.next_element.next_element.next_element.next_element.next_element)
-            resp = self.rspns("Did it work?\n").lower()
-            if resp == "yes":
-                exit(0)
-            elif resp == "no":
-                n_birth = new_stuff.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling
+            try:
+                new_stuff = self.soup.find("tr")
+                n_birth = new_stuff.next_sibling.next_sibling.next_sibling.next_sibling#.next_sibling.next_sibling
                 print (n_birth.next_element.next_element.next_element.next_element.next_element.next_element)
+                resp = self.rspns("Did it work?\n").lower()
+                if resp == "yes":
+                    exit(0)
+                elif resp == "no":
+                    n_birth = new_stuff.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling
+                    print (n_birth.next_element.next_element.next_element.next_element.next_element.next_element)
+            except AttributeError:
+                print ("Woops! Date unfetchable!")
 			#for sibling in self.soup.find("tr").next_siblings:
              #   print (repr(sibling))		
     def grab_birth_year_2(self):
