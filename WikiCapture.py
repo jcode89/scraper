@@ -25,14 +25,19 @@ class Scrape():
         except UnboundLocalError:       
             try:
                 new_stuff = self.soup.find("tr")
-                n_birth = new_stuff.next_sibling.next_sibling.next_sibling.next_sibling#.next_sibling.next_sibling
+                n_birth = new_stuff.next_sibling.next_sibling.next_sibling.next_sibling
                 print (n_birth.next_element.next_element.next_element.next_element.next_element.next_element)
                 resp = self.rspns("Did it work?\n").lower()
                 if resp == "yes":
                     exit(0)
                 elif resp == "no":
-                    n_birth = new_stuff.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling
-                    print ("Okay here it is: %s" % n_birth.next_element.next_element.next_element.next_element.next_element.next_element)
+                    print ("Here we are: %s" % n_birth.next_element.next_element.next_element.next_element.next_element.next_element.next_element.next_element)				
+                    resp = self.rspns("How about that?\n").lower()                
+                    if resp == "no":
+                        n_birth = new_stuff.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling
+                        print ("Okay here it is: %s" % n_birth.next_element.next_element.next_element.next_element.next_element.next_element)
+                    else:
+                        exit(0)
             except AttributeError:
                 print ("Woops! Date unfetchable!")
 			
